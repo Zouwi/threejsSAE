@@ -372,10 +372,17 @@ function animateToProperties(object, targetProperties, duration) {
         .start();
 }
 
-const triggerPosition = 200;
+let triggerPosition;
+
+if (window.innerWidth < 500) {
+    triggerPosition = 20;
+} else {
+    triggerPosition = 200;
+}
+
 
 let scrollY = 0;
-    
+
 /** CONSTANTES ANIMATION SCROLL**/
 let targetVINYL;
 let targetTV;
@@ -383,6 +390,7 @@ let targetDRESS;
 let targetREMOTE;
 let targetARROW;
 let isScrolling = false;
+
 function scrolling() {
     const newScrollY = window.scrollY;
 
@@ -390,78 +398,135 @@ function scrolling() {
     if (newScrollY > triggerPosition) {
         isScrolling = true;
 
-        targetVINYL = {
-            position: {x: -0.0044 * tailleW, y: -0.0018 * tailleW, z: -0.003 * tailleW},
-            scale: {x: 0.05 * tailleW, y: 0.05 * tailleW, z: 0.05 * tailleW},
-            rotation: {x: 0, y: 0, z: 0}
+        if (window.innerWidth < 500) {
+            targetVINYL = {
+                position: {x: -0.0044 * tailleW, y: -0.0018 * tailleW, z: -0.003 * tailleW},
+                scale: {x: 0.05 * tailleW, y: 0.05 * tailleW, z: 0.05 * tailleW},
+                rotation: {x: 0, y: 0, z: 0}
             };
+        } else {
+            targetVINYL = {
+                position: {x: -0.0044 * tailleW, y: -0.0018 * tailleW, z: -0.003 * tailleW},
+                scale: {x: 0.05 * tailleW, y: 0.05 * tailleW, z: 0.05 * tailleW},
+                rotation: {x: 0, y: 0, z: 0}
+            };
+        }
 
+        if (window.innerWidth < 500) {
             targetTV = {
                 position: {x: -0.0038 * tailleW, y: -0.0011 * tailleW, z: -0.003 * tailleW},
                 scale: {x: 0.0000078 * tailleW, y: 0.0000078 * tailleW, z: 0.0000078 * tailleW},
                 rotation: {x: 0, y: 0.9, z: 0}
             };
+        } else {
+            targetTV = {
+                position: {x: -0.0038 * tailleW, y: -0.0011 * tailleW, z: -0.003 * tailleW},
+                scale: {x: 0.0000078 * tailleW, y: 0.0000078 * tailleW, z: 0.0000078 * tailleW},
+                rotation: {x: 0, y: 0.9, z: 0}
+            };
+        }
 
-        targetREMOTE = {
-            position: {x: -0.0038 * tailleW, y: 0.0003 * tailleW, z: -0.003 * tailleW},
-            scale: {x: 0.000012 * tailleW, y: 0.000012 * tailleW, z: 0.000006 * tailleW},
-            rotation: {x: 0.5, y: 0, z: -0.5}
-        };
-
-        targetDRESS = {
-            position: {x: -0.0038 * tailleW, y: 0.0006 * tailleW, z: -0.003 * tailleW},
-            scale: {x: 0.001 * tailleW, y: 0.001 * tailleW, z: 0.001 * tailleW},
-            rotation: {x: 0, y: 0.1, z: 0}
-        };
-
-
-            targetARROW = {
-                rotation: {x: 0, y: 0, z: 1.55}
+        if (window.innerWidth < 500) {
+            targetREMOTE = {
+                position: {x: -0.0038 * tailleW, y: 0.0003 * tailleW, z: -0.003 * tailleW},
+                scale: {x: 0.000012 * tailleW, y: 0.000012 * tailleW, z: 0.000006 * tailleW},
+                rotation: {x: 0.5, y: 0, z: -0.5}
+            };
+        } else {
+            targetREMOTE = {
+                position: {x: -0.0038 * tailleW, y: 0.0003 * tailleW, z: -0.003 * tailleW},
+                scale: {x: 0.000012 * tailleW, y: 0.000012 * tailleW, z: 0.000006 * tailleW},
+                rotation: {x: 0.5, y: 0, z: -0.5}
             }
+        }
+
+        if (window.innerWidth < 500) {
+            targetDRESS = {
+                position: {x: -0.0038 * tailleW, y: 0.0006 * tailleW, z: -0.003 * tailleW},
+                scale: {x: 0.001 * tailleW, y: 0.001 * tailleW, z: 0.001 * tailleW},
+                rotation: {x: 0, y: 0.1, z: 0}
+            };
+        } else {
+            targetDRESS = {
+                position: {x: -0.0038 * tailleW, y: 0.0006 * tailleW, z: -0.003 * tailleW},
+                scale: {x: 0.001 * tailleW, y: 0.001 * tailleW, z: 0.001 * tailleW},
+                rotation: {x: 0, y: 0.1, z: 0}
+            };
+        }
+
+        targetARROW = {
+            rotation: {x: 0, y: 0, z: 1.55}
+        }
 
         const duration = 700;
         setTimeout(() => {
             isScrolling = false; // Réinitialiser l'indicateur après la durée de l'animation de défilement
         }, 700);
-
-        if (window.innerWidth < 500) {
-            //animateToProperties(vinyl, targetVINYL, duration);
-            //animateToProperties(tv, targetTV, duration);
-            //animateToProperties(dress, targetDRESS, duration);
-            //animateToProperties(remote, targetREMOTE, duration);
-            //animateToProperties(arrow, targetARROW, duration);
-        } else {
             animateToProperties(vinyl, targetVINYL, duration);
             animateToProperties(tv, targetTV, duration);
             animateToProperties(dress, targetDRESS, duration);
             animateToProperties(remote, targetREMOTE, duration);
             animateToProperties(arrow, targetARROW, duration);
-        }
-
     }
     // Scroll vers le haut
     else {
         isScrolling = true;
+
+        if (window.innerWidth < 500) {
+            targetVINYL = {
+                position: {x: -1, y: 1, z: -2},
+                scale: {x: 0.09 * tailleW, y: 0.09 * tailleW, z: 0.09 * tailleW},
+                rotation: {x: 0, y: 0, z: 0}
+            };
+        } else {
             targetVINYL = {
                 position: {x: -7, y: -2, z: -8},
                 scale: {x: 0.09 * tailleW, y: 0.09 * tailleW, z: 0.09 * tailleW},
                 rotation: {x: 0, y: 0, z: 0}
             };
+        }
+
+        if (window.innerWidth < 500) {
+            targetTV = {
+                position: {x: 0.5, y: 0.8, z: -2},
+                scale: {x: 0.000015 * tailleW, y: 0.000015 * tailleW, z: 0.000015 * tailleW},
+                rotation: {x: 0, y: 0, z: 0}
+            };
+        } else {
             targetTV = {
                 position: {x: 4, y: -2, z: -6},
                 scale: {x: 0.000015 * tailleW, y: 0.000015 * tailleW, z: 0.000015 * tailleW},
                 rotation: {x: 0, y: -0.9, z: 0}
             };
+        }
+
+        if (window.innerWidth < 500) {
+            targetDRESS = {
+                position: {x: 0.5, y: 1.3, z: -2},
+                scale: {x: 0.0016 * tailleW, y: 0.0016 * tailleW, z: 0.0016 * tailleW},
+                rotation: {x: 0, y: -0.4, z: 0}
+            };
+        } else {
             targetDRESS = {
                 position: {x: 5, y: 0, z: -10},
                 scale: {x: 0.0026 * tailleW, y: 0.0026 * tailleW, z: 0.0026 * tailleW},
                 rotation: {x: 0, y: 0.1, z: 0}
             };
+        }
+
+        if (window.innerWidth < 500) {
+            targetREMOTE = {
+                position: {x: -0.2, y: 1.4, z: -1},
+                scale: {x: 0.000016 * tailleW, y: 0.000016 * tailleW, z: 0.000016 * tailleW},
+                rotation: {x: 0.8, y: 0, z: 0}
+            }
+        } else {
             targetREMOTE = {
                 position: {x: 0, y: 0.4, z: -1},
                 scale: {x: 0.000005 * tailleW, y: 0.000005 * tailleW, z: 0.000005 * tailleW},
                 rotation: {x: 0.3, y: 0, z: 0}
             }
+        }
         targetARROW = {
             rotation: {x: 0, y: 0, z: -1.55}
         }
@@ -469,20 +534,11 @@ function scrolling() {
         setTimeout(() => {
             isScrolling = false; // Réinitialiser l'indicateur après la durée de l'animation de défilement
         }, 700);
-
-        if (window.innerWidth < 500) {
-            //animateToProperties(vinyl, targetVINYL, duration);
-            //animateToProperties(tv, targetTV, duration);
-            //animateToProperties(dress, targetDRESS, duration);
-            //animateToProperties(remote, targetREMOTE, duration);
-            //animateToProperties(arrow, targetARROW, duration);
-        } else {
             animateToProperties(vinyl, targetVINYL, duration);
             animateToProperties(tv, targetTV, duration);
             animateToProperties(dress, targetDRESS, duration);
             animateToProperties(remote, targetREMOTE, duration);
             animateToProperties(arrow, targetARROW, duration);
-        }
     }
     scrollY = newScrollY;
 }
@@ -490,9 +546,9 @@ function scrolling() {
 function verifCompteur() {
     if (compteurModel === 0) {
         scrolling();
-        console.log("coucou");
     }
 }
+
 window.addEventListener('scroll', scrolling);
 /**
  * Camera
@@ -592,8 +648,7 @@ document.addEventListener('click', (event) => {
             let urlFurnitures = document.querySelector('#furnituresUrl').getAttribute('data-furnitures');
             if (urlFurnitures) {
                 window.location.href = urlFurnitures;
-            }
-            else {
+            } else {
                 window.location.href = "https://shop.iutmulhouse.fr/index.php?id_category=17&controller=category&id_lang=1";
             }
         }
@@ -620,8 +675,7 @@ document.addEventListener('click', () => {
             let urlDresses = document.querySelector('#dressesUrl').getAttribute('data-dresses');
             if (urlDresses) {
                 window.location.href = urlDresses;
-            }
-            else {
+            } else {
                 window.location.href = "https://shop.iutmulhouse.fr/index.php?id_category=3&controller=category&id_lang=1";
             }
 
@@ -649,8 +703,7 @@ document.addEventListener('click', () => {
             let urlMusic = document.querySelector('#musicUrl').getAttribute('data-music');
             if (urlMusic) {
                 window.location.href = urlMusic;
-            }
-            else {
+            } else {
                 window.location.href = "https://shop.iutmulhouse.fr/index.php?id_category=18&controller=category&id_lang=1";
             }
         }
@@ -677,8 +730,7 @@ document.addEventListener('click', () => {
             let urlGames = document.querySelector('#gamesUrl').getAttribute('data-games');
             if (urlGames) {
                 window.location.href = urlGames;
-            }
-            else {
+            } else {
                 window.location.href = "https://shop.iutmulhouse.fr/index.php?id_category=19&controller=category&id_lang=1";
             }
 
@@ -748,7 +800,7 @@ document.addEventListener('mousemove', (event) => {
  */
 let renderer = new THREE.WebGLRenderer({
     canvas: canvas,
-    antialias : false
+    antialias: false
 })
 
 renderer.shadowMap.enabled = true;
